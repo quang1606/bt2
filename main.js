@@ -36,7 +36,7 @@ const render = () => {
         </div>
     `).join("");
 
-    quizcontainer.innerHTML = html;  // Chèn mã HTML vào container
+    quizcontainer.innerHTML = html;  
                 };
     
    
