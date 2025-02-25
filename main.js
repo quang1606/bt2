@@ -17,14 +17,37 @@ const quizes = [
 ];
 
 const btn = document.querySelector("#btn");
-const quizItems = document.querySelectorAll(".quiz-item");
+const quizcontainer = document.querySelector(".quiz-container");
+
 const random = (length) => Math.floor(Math.random() * length);
+
 const render = () => {
-    quizItems.forEach((quizItem, index) => {
-        const radioInputs = quizItem.querySelectorAll(".quiz-answer-item input[type='radio']");
+    let html = quizes.map(quiz => `
+        <div class="quiz-item">
+            <h3>Câu hỏi: ${quiz.question}</h3>
+            <div class="quiz-answer">
+                ${quiz.answers.map(answer => `
+                    <div class="quiz-answer-item">
+                        <input type="radio" name="quiz-${quiz.id}" value="${answer}">
+                        <label>${answer}</label>
+                    </div>
+                `).join("")}
+            </div>
+        </div>
+    `).join("");
+
+    quizcontainer.innerHTML = html;  // Chèn mã HTML vào container
+                };
+    
+   
+
+render();
+
+btn.addEventListener("click", function(){
+    document.querySelectorAll(".quiz-item").forEach((quizItem) => {
+        const radioInputs = quizItem.querySelectorAll("input[type='radio']");
         if (radioInputs.length > 0) {
-            radioInputs[random(radioInputs.length)].checked = true; 
+            radioInputs[random(radioInputs.length)].checked = true;
         }
     });
-};
-btn.addEventListener("click", render);
+} );
